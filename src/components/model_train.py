@@ -79,7 +79,7 @@ class ModelTrainer:
             )
 
             # Make a prediction
-            predicted=best_model.predict(X_test)
+            predicted = best_model.predict(X_test)
 
             # Get the r2_score result of the prediction
             r2_score_results = r2_score(y_test, predicted) 

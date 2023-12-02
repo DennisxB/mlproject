@@ -1,3 +1,4 @@
+# Import libraries and dependencies
 import os
 import sys
 from dataclasses import dataclass
@@ -21,6 +22,7 @@ class DataTransformationConfig:
 class DataTransformation:
     def __init__(self):
         self.data_transformation_config = DataTransformationConfig()
+
 
     # function responsible for data transformation
     def get_data_transformer_object(self):
@@ -70,10 +72,10 @@ class DataTransformation:
             logging.info(f"Preprocessor pipeline is created.")
 
             return preprocessor
-
         
         except Exception as e:
             raise CustomException(e, sys)
+
 
     def initiate_data_transformation(self, train_path, test_path):
         try: 

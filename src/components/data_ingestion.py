@@ -1,9 +1,10 @@
+# Import Libraries and Dependencies
 import os 
 import sys 
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
-from dataclasses import dataclass # for creating class variables
+from dataclasses import dataclass                                       # for creating class variables for data
 
 from src.exception import CustomException
 from src.logger import logging
@@ -12,17 +13,15 @@ from src.components.data_transformation import DataTransformationConfig
 from src.components.model_train import ModelTrainer
 from src.components.model_train import ModelTrainerConfig
 
-@dataclass # directly defining class variables
+@dataclass                                                              # directly defining class variables
 class DataIngestionConfig:
     """
     A class that defines the path to store train, test and raw data
     """
-    # Set the path for the train data
-    train_data_path: str = os.path.join('artifacts', 'train.csv')
-    # Set the path for the test data
-    test_data_path: str = os.path.join('artifacts', 'test.csv')
-    # Set the path for the raw data
-    raw_data_path: str = os.path.join('artifacts', 'data.csv')
+
+    train_data_path: str = os.path.join('artifacts', 'train.csv')       # Set the path for the train data
+    test_data_path: str = os.path.join('artifacts', 'test.csv')         # Set the path for the test data
+    raw_data_path: str = os.path.join('artifacts', 'data.csv')          # Set the path for the raw data
 
 
 class DataIngestion:
@@ -44,9 +43,11 @@ class DataIngestion:
             # Save the raw(full) data to the required path
             df.to_csv(self.ingestion_config.raw_data_path, index=False, header=True)
             
+            # Split data into train and test set
             logging.info("Train test split initiated")
             train_set, test_set = train_test_split(df, test_size=0.2, random_state=42)
-
+            
+            # Save splitted data into train and test path
             train_set.to_csv(self.ingestion_config.train_data_path, index=False, header=True)
             test_set.to_csv(self.ingestion_config.test_data_path, index=False, header=True)
 
@@ -55,7 +56,8 @@ class DataIngestion:
             return(
                 self.ingestion_config.train_data_path, 
                 self.ingestion_config.test_data_path
-            ) 
+            )
+         
         except Exception as e:
             raise CustomException(e, sys)
 

@@ -1,6 +1,7 @@
 import sys
-# custom exception
 
+
+# custom exception
 def error_message_detail(error, error_detail:sys):
     """
     Functionality to get detailed error information
@@ -14,6 +15,7 @@ def error_message_detail(error, error_detail:sys):
             line number [{exc_tb.tb_lineno}] error message [{str(error)}]"
     
     return error_message
+
 
 # Creating a Custom Exception class
 class CustomException(Exception):

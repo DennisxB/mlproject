@@ -1,12 +1,11 @@
+python==3.11.5
 pandas
 numpy
 matplotlib
 seaborn
 scikit-learn
-catboost
-xgboost
 pickle
 fastapi
 jinja2
 uvicorn
-#-e .
+-e .

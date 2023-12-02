@@ -6,8 +6,13 @@ HYPHEN_E_DOT = '-e .'
 
 
 def get_requirements(file_path) -> List[str]:
-    """
-    A function to get requirements for installation.
+    """A function to get requirements for installation.
+    
+    Args: 
+        file_path: Define file location of object.
+
+    Returns: 
+        List of python libraries
     """
     requirements = []
 

@@ -1,22 +1,22 @@
-# Basic Import
+# Import libraries and dependencies
 import os 
 import sys
-
 #import seaborn as sns
-# Modelling
+
 from sklearn.metrics import r2_score
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor,AdaBoostRegressor
 from sklearn.linear_model import LinearRegression, Ridge,Lasso
-from catboost import CatBoostRegressor
+#from catboost import CatBoostRegressor
 #from xgboost import XGBRegressor
-
-from dataclasses import dataclass
 
 from src.logger import logging
 from src.exception import CustomException
 from src.utils import save_object, evaluate_models
+
+
+from dataclasses import dataclass
 
 @dataclass
 class ModelTrainerConfig:
@@ -55,7 +55,6 @@ class ModelTrainer:
             model_results = evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, 
                                             y_test=y_test, models=models)
 
-
             # Get the best model score from dict
             best_model_score = max(sorted(model_results.values()))
             best_model_score
@@ -68,6 +67,7 @@ class ModelTrainer:
             # Best model
             best_model = models[best_model_name]
 
+            # Get models greater than 60%
             if best_model_score < 0.6:
                 raise CustomException("No best model found, r2 score < 0.6")
             logging.info(f"Best model on training and testing : {[best_model_name]}")
@@ -86,8 +86,6 @@ class ModelTrainer:
 
             # return the results
             return r2_score_results
-        
-
         
         except Exception as e:
             raise CustomException(e, sys)
